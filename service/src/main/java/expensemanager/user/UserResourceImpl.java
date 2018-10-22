@@ -1,13 +1,10 @@
-package expensemanager.resource;
+package expensemanager.user;
 
-import expensemanager.user.UserDto;
-import expensemanager.user.UserResource;
-import expensemanager.user.UserService;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-
+@RequestMapping("/v1")
 public class UserResourceImpl implements UserResource {
 
     private UserService userService;
@@ -17,30 +14,26 @@ public class UserResourceImpl implements UserResource {
     }
 
     @Override
-    @RequestMapping("user")
-    @PostMapping(consumes = "application/json")
+    @PostMapping("user")
     public UserDto create(@RequestBody UserDto userDto) {
         return userService.create(userDto);
     }
 
     @Override
-    @RequestMapping("user")
-    @PutMapping(consumes = "application/json")
+    @PutMapping("user")
     public UserDto update(@RequestBody UserDto userDto) {
         return userService.update(userDto);
     }
 
     @Override
-    @RequestMapping("user")
-    @DeleteMapping("{id}")
+    @DeleteMapping("user/{id}")
     public void delete(@PathVariable("id") Long id) {
         userService.delete(id);
     }
 
     @Override
-    @RequestMapping("user")
-    @GetMapping("{id}")
+    @GetMapping("user/{id}")
     public UserDto getById(@PathVariable("id") Long id) {
-        return userService.getById(id);
+        return userService.findById(id);
     }
 }

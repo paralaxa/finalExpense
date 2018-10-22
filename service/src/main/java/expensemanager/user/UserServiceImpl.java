@@ -15,15 +15,15 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto create(UserDto userDto) {
-        User userToBeCreated = userMapper.userFromUserDto(userDto);
+        User userToBeCreated = userMapper.entityFromDto(userDto);
         User userCreated = userDao.save(userToBeCreated);
-        return userMapper.userDtoFromUser(userCreated);
+        return userMapper.dtoFromENtity(userCreated);
     }
 
     public UserDto update(UserDto userDto) {
-        User userToBeCreated = userMapper.userFromUserDto(userDto);
+        User userToBeCreated = userMapper.entityFromDto(userDto);
         User userCreated = userDao.save(userToBeCreated);
-        return userMapper.userDtoFromUser(userCreated);
+        return userMapper.dtoFromENtity(userCreated);
     }
 
     public void delete(Long id) {
@@ -33,10 +33,10 @@ public class UserServiceImpl implements UserService {
         userDao.delete(user);
     }
 
-    public UserDto getById(Long id) {
+    public UserDto findById(Long id) {
         Optional<User> byId = userDao.findById(id);
         User user = byId.orElse(null);
-        return userMapper.userDtoFromUser(user);
+        return userMapper.dtoFromENtity(user);
 
 
     }

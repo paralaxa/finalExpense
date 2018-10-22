@@ -1,9 +1,9 @@
-package expensemanager.user;
+package expensemanager.expense;
 
 import expensemanager.common.CommonEntityToDtoMapper;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper extends CommonEntityToDtoMapper<UserDto, User> {
+public interface ExpenseMapper extends CommonEntityToDtoMapper<ExpenseDto, Expense> {
 
 }

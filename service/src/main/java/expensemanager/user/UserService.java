@@ -7,5 +7,5 @@ public interface UserService {
 
     void delete(Long id);
 
-    UserDto getById(Long id);
+    UserDto findById(Long id);
 }
