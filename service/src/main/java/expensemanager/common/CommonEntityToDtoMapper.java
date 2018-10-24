@@ -1,7 +1,9 @@
 package expensemanager.common;
 
-public interface CommonEntityToDtoMapper<T, E> {
+public interface CommonEntityToDtoMapper<T, C, E> {
     E entityFromDto(T dto);
 
-    T dtoFromENtity(E entity);
+    T dtoFromEntity(E entity);
+
+    E entityFromCreateDto(C c);
 }

@@ -6,6 +6,6 @@ import expensemanager.user.UserDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface CategoryMapper extends CommonEntityToDtoMapper<CategoryDto, Category> {
+public interface CategoryMapper extends CommonEntityToDtoMapper<CategoryDto,CategoryCreateDto,  Category> {
 
 }

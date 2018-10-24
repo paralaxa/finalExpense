@@ -15,8 +15,8 @@ public class UserResourceImpl implements UserResource {
 
     @Override
     @PostMapping("user")
-    public UserDto create(@RequestBody UserDto userDto) {
-        return userService.create(userDto);
+    public UserDto create(@RequestBody UserCreateDto userCreateDto) {
+        return userService.create(userCreateDto);
     }
 
     @Override

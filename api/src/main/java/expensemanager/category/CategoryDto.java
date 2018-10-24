@@ -3,7 +3,11 @@ package expensemanager.category;
 
 import expensemanager.user.UserDto;
 
-public class CategoryDto {
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+public class CategoryDto implements Serializable {
+    @NotNull
     private Long id;
     private String name;
     private String description;

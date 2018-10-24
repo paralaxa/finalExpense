@@ -21,8 +21,8 @@ public class ExpenseResourceImpl implements ExpenseResource {
 
     @Override
     @PostMapping("expense")
-    public ExpenseDto create(@RequestBody ExpenseDto expenseDto) {
-        return expenseService.create(expenseDto);
+    public ExpenseDto create(@RequestBody ExpenseCreateDto expenseCreateDto) {
+        return expenseService.create(expenseCreateDto);
     }
 
     @Override

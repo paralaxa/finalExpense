@@ -1,7 +1,7 @@
 package expensemanager.user;
 
 public interface UserResource {
-    UserDto create(UserDto userDto);
+    UserDto create(UserCreateDto userCreateDto);
 
     UserDto update(UserDto userDto);
 

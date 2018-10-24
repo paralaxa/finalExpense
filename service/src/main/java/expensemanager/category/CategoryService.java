@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface CategoryService {
 
-    CategoryDto create(CategoryDto categoryDto);
+    CategoryDto create(CategoryCreateDto categoryCreateDto);
 
     CategoryDto update(CategoryDto categoryDto);
 

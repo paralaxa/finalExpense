@@ -15,15 +15,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto create(CategoryDto categoryDto) {
-        Category category = categoryMapper.entityFromDto(categoryDto);
-        return categoryMapper.dtoFromENtity(categoryDao.save(category));
+    public CategoryDto create(CategoryCreateDto categoryCreateDto) {
+        Category category = categoryMapper.entityFromCreateDto(categoryCreateDto);
+        return categoryMapper.dtoFromEntity(categoryDao.save(category));
     }
 
     @Override
     public CategoryDto update(CategoryDto categoryDto) {
         Category category = categoryMapper.entityFromDto(categoryDto);
-        return categoryMapper.dtoFromENtity(categoryDao.save(category));
+        return categoryMapper.dtoFromEntity(categoryDao.save(category));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto findById(Long id) {
-        return categoryMapper.dtoFromENtity(categoryDao.getOne(id));
+        return categoryMapper.dtoFromEntity(categoryDao.getOne(id));
     }
 
     @Override

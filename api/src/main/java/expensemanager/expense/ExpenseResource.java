@@ -6,7 +6,7 @@ public interface ExpenseResource {
 
     Set<ExpenseDto> getAll();
 
-    ExpenseDto create(ExpenseDto expenseDto);
+    ExpenseDto create(ExpenseCreateDto expenseCreateDto);
 
     void delete(Long id);
 

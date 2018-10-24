@@ -4,7 +4,11 @@ package expensemanager.expense;
 import expensemanager.category.CategoryDto;
 import expensemanager.user.UserDto;
 
-public class ExpenseDto {
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+public class ExpenseDto implements Serializable {
+    @NotNull
     private Long id;
     private UserDto creator;
     private String description;

@@ -1,9 +1,13 @@
 package expensemanager.user;
 
-public class UserDto {
-    private Long id;
-    private String username;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
+public class UserDto implements Serializable {
+    @NotNull
+    private Long id;
+    @NotNull
+    private String username;
 
     public Long getId() {
         return id;
@@ -20,7 +24,6 @@ public class UserDto {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
 
     @Override

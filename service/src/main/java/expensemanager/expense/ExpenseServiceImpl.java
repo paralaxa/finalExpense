@@ -16,15 +16,15 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public ExpenseDto create(ExpenseDto expenseDto) {
-        Expense expense = expenseMapper.entityFromDto(expenseDto);
-        return expenseMapper.dtoFromENtity(expenseDao.save(expense));
+    public ExpenseDto create(ExpenseCreateDto expenseCreateDto) {
+        Expense expense = expenseMapper.entityFromCreateDto(expenseCreateDto);
+        return expenseMapper.dtoFromEntity(expenseDao.save(expense));
     }
 
     @Override
     public ExpenseDto update(ExpenseDto expenseDto) {
         Expense expense = expenseMapper.entityFromDto(expenseDto);
-        return expenseMapper.dtoFromENtity(expenseDao.save(expense));
+        return expenseMapper.dtoFromEntity(expenseDao.save(expense));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public ExpenseDto findById(Long id) {
-        return expenseMapper.dtoFromENtity(expenseDao.getOne(id));
+        return expenseMapper.dtoFromEntity(expenseDao.getOne(id));
     }
 
     @Override

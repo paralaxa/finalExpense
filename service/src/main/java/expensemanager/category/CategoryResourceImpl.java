@@ -17,6 +17,17 @@ public class CategoryResourceImpl implements CategoryResource {
         this.categoryService = categoryService;
     }
 
+
+    @Override
+    public CategoryDto create(CategoryCreateDto categoryCreateDto) {
+        return categoryService.create(categoryCreateDto);
+    }
+
+    @Override
+    public CategoryDto update(CategoryDto categoryDto) {
+        return categoryService.update(categoryDto);
+    }
+
     @Override
     @GetMapping("category")
     public Set<CategoryDto> getAll() {
@@ -28,4 +39,6 @@ public class CategoryResourceImpl implements CategoryResource {
     public CategoryDto getById(@PathVariable("id") Long id) {
         return categoryService.findById(id);
     }
+
+
 }

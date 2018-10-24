@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface ExpenseService {
 
-    ExpenseDto create(ExpenseDto expenseDto);
+    ExpenseDto create(ExpenseCreateDto expenseCreateDto);
 
     ExpenseDto update(ExpenseDto expenseDto);
 
