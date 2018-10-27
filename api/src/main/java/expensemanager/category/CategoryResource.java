@@ -6,7 +6,7 @@ public interface CategoryResource {
 
     CategoryDto create(CategoryCreateDto categoryCreateDto);
 
-    CategoryDto update(CategoryDto categoryDto);
+    CategoryDto update(CategoryUpdateDto categoryUpdateDto, Long id);
 
     Set<CategoryDto> getAll();
 

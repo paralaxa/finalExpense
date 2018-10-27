@@ -1,10 +1,13 @@
 package expensemanager.user;
 
+import expensemanager.common.BusinessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
     private UserMapper userMapper;
@@ -22,10 +25,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(UserDto userDto) {
-        User userToBeCreated = userMapper.entityFromDto(userDto);
-        User userCreated = userDao.save(userToBeCreated);
-        return userMapper.dtoFromEntity(userCreated);
+    public UserDto update(UserUpdateDto userUpdateDto) { //nerobim savE!!!
+        Optional<User> userById = userDao.findById(userUpdateDto.getId());
+        if (userById.isPresent()) {
+            userMapper.enrichEntityWithUpdateDto(userById.get(), userUpdateDto);
+            return userMapper.dtoFromEntity(userById.get());
+//             pre security ukazat, co je filter a ako funguje?
+        }
+        throw new BusinessException("User not found for id:" + userUpdateDto.getId());
+
     }
 
     @Override
@@ -37,6 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDto findById(Long id) {
         Optional<User> byId = userDao.findById(id);
         User user = byId.orElse(null);

@@ -20,9 +20,10 @@ public class UserResourceImpl implements UserResource {
     }
 
     @Override
-    @PutMapping("user")
-    public UserDto update(@RequestBody UserDto userDto) {
-        return userService.update(userDto);
+    @PutMapping("user/{id}")
+    public UserDto update(@RequestBody UserUpdateDto userUpdateDto, @PathVariable("id") Long id) {
+        userUpdateDto.setId(id);
+        return userService.update(userUpdateDto);
     }
 
     @Override

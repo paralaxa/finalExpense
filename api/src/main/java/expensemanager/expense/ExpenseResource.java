@@ -1,16 +1,16 @@
 package expensemanager.expense;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ExpenseResource {
 
-    Set<ExpenseDto> getAll();
+    List<ExpenseDto> getAll();
 
     ExpenseDto create(ExpenseCreateDto expenseCreateDto);
 
     void delete(Long id);
 
-    ExpenseDto update(ExpenseDto expenseDto);
+    ExpenseDto update(ExpenseUpdateDto expenseUpdateDto, Long id);
 
-    Set<ExpenseDto> getByCategoryId(Long categoryId);
+    List<ExpenseDto> getByCategoryId(Long categoryId);
 }

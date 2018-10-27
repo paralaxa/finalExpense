@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class CategoryCreateDto implements Serializable {
-    @NotNull
+    @NotNull(message = "name cannot be null")
     private String name;
     @NotNull
     private String description;

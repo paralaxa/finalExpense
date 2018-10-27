@@ -1,9 +1,13 @@
 package expensemanager.common;
 
-public interface CommonEntityToDtoMapper<T, C, E> {
-    E entityFromDto(T dto);
+import org.mapstruct.MappingTarget;
 
-    T dtoFromEntity(E entity);
+public interface CommonEntityToDtoMapper<TD, TC, TU, TE> {
+    TE entityFromDto(TC dto);
 
-    E entityFromCreateDto(C c);
+    TD dtoFromEntity(TE entity);
+
+    TE entityFromCreateDto(TC c);
+
+    void enrichEntityWithUpdateDto(@MappingTarget  TE e, TU c);
 }

@@ -1,7 +1,10 @@
 package expensemanager.category;
 
+import expensemanager.common.BusinessException;
 import org.springframework.stereotype.Service;
 
+import javax.sql.rowset.serial.SerialException;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,9 +24,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(CategoryDto categoryDto) {
-        Category category = categoryMapper.entityFromDto(categoryDto);
-        return categoryMapper.dtoFromEntity(categoryDao.save(category));
+    public CategoryDto update(CategoryUpdateDto categoryUpdateDto) {
+        Optional<Category> categoryById = categoryDao.findById(categoryUpdateDto.getId());
+        if (categoryById.isPresent()) {
+            categoryMapper.enrichEntityWithUpdateDto(categoryById.get(), categoryUpdateDto);
+            return categoryMapper.dtoFromEntity(categoryById.get());
+        }
+        throw new BusinessException("Category not found for id:" + categoryUpdateDto.getId());
     }
 
     @Override

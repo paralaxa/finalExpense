@@ -3,7 +3,7 @@ package expensemanager.user;
 public interface UserService {
     UserDto create(UserCreateDto userCreateDto);
 
-    UserDto update(UserDto userDto);
+    UserDto update(UserUpdateDto userUpdateDto);
 
     void delete(Long id);
 

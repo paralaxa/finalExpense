@@ -1,9 +1,6 @@
 package expensemanager.category;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -19,13 +16,16 @@ public class CategoryResourceImpl implements CategoryResource {
 
 
     @Override
-    public CategoryDto create(CategoryCreateDto categoryCreateDto) {
+    @PostMapping("category")
+    public CategoryDto create(@RequestBody CategoryCreateDto categoryCreateDto) {
         return categoryService.create(categoryCreateDto);
     }
 
     @Override
-    public CategoryDto update(CategoryDto categoryDto) {
-        return categoryService.update(categoryDto);
+    @PutMapping("category/{id}")
+    public CategoryDto update(@RequestBody CategoryUpdateDto categoryUpdateDto, @PathVariable("id") Long id) {
+        categoryUpdateDto.setId(id);
+        return categoryService.update(categoryUpdateDto);
     }
 
     @Override

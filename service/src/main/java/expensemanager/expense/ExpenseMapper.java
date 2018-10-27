@@ -4,6 +4,6 @@ import expensemanager.common.CommonEntityToDtoMapper;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ExpenseMapper extends CommonEntityToDtoMapper<ExpenseDto, ExpenseCreateDto, Expense> {
+public interface ExpenseMapper extends CommonEntityToDtoMapper<ExpenseDto, ExpenseCreateDto,ExpenseUpdateDto, Expense> {
 
 }

@@ -1,8 +1,11 @@
 package expensemanager.expense;
 
+import expensemanager.common.BusinessException;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
@@ -22,9 +25,13 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public ExpenseDto update(ExpenseDto expenseDto) {
-        Expense expense = expenseMapper.entityFromDto(expenseDto);
-        return expenseMapper.dtoFromEntity(expenseDao.save(expense));
+    public ExpenseDto update(ExpenseUpdateDto expenseUpdateDto) {
+        Optional<Expense> expenseById = expenseDao.findById(expenseUpdateDto.getId());
+        if (expenseById.isPresent()) {
+            expenseMapper.enrichEntityWithUpdateDto(expenseById.get(), expenseUpdateDto);
+            return expenseMapper.dtoFromEntity(expenseById.get());
+        }
+        throw new BusinessException("Expense not found by id:" + expenseUpdateDto.getId());
     }
 
     @Override
@@ -40,12 +47,12 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public Set<ExpenseDto> findByCategoryId(Long categoryId) {
-        return null;
+    public List<ExpenseDto> findByCategoryId(Long categoryId) {
+        return expenseDao.findByCategory_Id(categoryId).stream().map(expense -> expenseMapper.dtoFromEntity(expense)).collect(Collectors.toList());
     }
 
     @Override
-    public Set<ExpenseDto> findAll() {
-        return null;
+    public List<ExpenseDto> findAll() { //!!!!N+1 query!!!!!
+        return expenseDao.findAll().stream().map(expense -> expenseMapper.dtoFromEntity(expense)).collect(Collectors.toList());
     }
 }

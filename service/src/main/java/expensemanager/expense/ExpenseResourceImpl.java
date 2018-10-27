@@ -2,6 +2,7 @@ package expensemanager.expense;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -15,7 +16,7 @@ public class ExpenseResourceImpl implements ExpenseResource {
 
     @Override
     @GetMapping("expense")
-    public Set<ExpenseDto> getAll() {
+    public List<ExpenseDto> getAll() {
         return expenseService.findAll();
     }
 
@@ -32,14 +33,15 @@ public class ExpenseResourceImpl implements ExpenseResource {
     }
 
     @Override
-    @PutMapping("expense")
-    public ExpenseDto update(@RequestBody ExpenseDto expenseDto) {
-        return expenseService.update(expenseDto);
+    @PutMapping("expense/{id}")
+    public ExpenseDto update(@RequestBody ExpenseUpdateDto expenseUpdateDto,@PathVariable("id") Long id) {
+        expenseUpdateDto.setId(id);
+        return expenseService.update(expenseUpdateDto);
     }
 
     @Override
     @GetMapping("category/{categoryId}/expense")
-    public Set<ExpenseDto> getByCategoryId(@PathVariable("categoryId") Long categoryId) {
+    public List<ExpenseDto> getByCategoryId(@PathVariable("categoryId") Long categoryId) {
         return expenseService.findByCategoryId(categoryId);
     }
 }
