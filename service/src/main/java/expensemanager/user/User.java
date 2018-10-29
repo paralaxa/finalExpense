@@ -1,27 +1,63 @@
 package expensemanager.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
-    @Column(name = "id")
     private Long id;
-    @Column(name = "username")
+    @NotNull
     private String username;
-
-    public Long getId() {
-        return id;
-    }
+    @NotNull
+    private String password;
+    private String phonenumber;
+    private String email;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_TO_ROLE")
+    private List<Role> roles;
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @JsonIgnore
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    @Override
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+    @JsonSetter
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -30,19 +66,72 @@ public class User {
         this.username = username;
     }
 
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return id != null ? id.equals(user.id) : user.id == null;
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @JsonIgnore
+    public void setRole(Role role) {
+        if (roles == null) {
+            roles = new ArrayList<>();
+        }
+        roles.add(role);
+    }
+
+    @JsonIgnore
+    public void withRole(String strRole) {
+        if (roles == null) {
+            roles = new ArrayList<>();
+        }
+        Role role = new Role();
+        role.setAuthority(strRole);
+        roles.add(role);
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

@@ -33,7 +33,10 @@
             <artifactId>mapstruct-jdk8</artifactId>
             <version>${mapstruct-processor.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>sk.stopangin.spring.l5rest</groupId>
             <artifactId>api</artifactId>

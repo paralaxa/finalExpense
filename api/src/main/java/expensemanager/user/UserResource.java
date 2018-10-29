@@ -1,5 +1,7 @@
 package expensemanager.user;
 
+import javax.validation.Valid;
+
 public interface UserResource {
     UserDto create(UserCreateDto userCreateDto);
 

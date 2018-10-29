@@ -1,7 +1,10 @@
 package expensemanager.user;
 
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 public interface UserService {
-    UserDto create(UserCreateDto userCreateDto);
+    UserDto create(@Valid UserCreateDto userCreateDto);
 
     UserDto update(UserUpdateDto userUpdateDto);
 
