@@ -1,11 +1,14 @@
 package expensemanager.user;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class UserCreateDto implements Serializable {
-    @NotNull(message = "username cannot be null")
+    @NotEmpty(message = "username cannot be empty")
     private String username;
+    @NotEmpty(message = "password cannot be empty")
+    private String password;
 
     public String getUsername() {
         return username;
@@ -15,11 +18,13 @@ public class UserCreateDto implements Serializable {
         this.username = username;
     }
 
-
-    @Override
-    public String toString() {
-        return "UserCreateDto{" +
-                ", username='" + username + '\'' +
-                '}';
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
 }

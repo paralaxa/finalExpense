@@ -1,7 +1,5 @@
 package expensemanager.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,8 +19,6 @@ public class User implements UserDetails {
     private String username;
     @NotNull
     private String password;
-    private String phonenumber;
-    private String email;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_TO_ROLE")
     private List<Role> roles;
@@ -36,23 +32,19 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
 
-    @JsonIgnore
     public List<Role> getRoles() {
         return roles;
     }
 
     @Override
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
-    @JsonSetter
     public void setPassword(String password) {
         this.password = password;
     }
@@ -67,30 +59,25 @@ public class User implements UserDetails {
     }
 
     @Override
-    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
-    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
-    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
 
-    @JsonIgnore
     public void setRole(Role role) {
         if (roles == null) {
             roles = new ArrayList<>();
@@ -98,7 +85,6 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    @JsonIgnore
     public void withRole(String strRole) {
         if (roles == null) {
             roles = new ArrayList<>();
@@ -108,29 +94,11 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", phonenumber='" + phonenumber + '\'' +
-                ", email='" + email + '\'' +
                 ", roles=" + roles +
                 '}';
     }

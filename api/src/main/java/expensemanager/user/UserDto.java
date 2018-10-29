@@ -4,9 +4,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class UserDto implements Serializable {
-    @NotNull
     private Long id;
-    @NotNull
     private String username;
 
     public Long getId() {
@@ -24,6 +22,8 @@ public class UserDto implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
 
 
     @Override
