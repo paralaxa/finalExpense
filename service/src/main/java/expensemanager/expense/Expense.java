@@ -5,6 +5,7 @@ import expensemanager.category.Category;
 import expensemanager.user.User;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Expense {
@@ -12,13 +13,15 @@ public class Expense {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User creator;
     @Column(name = "description")
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
+    private Date creation;
+    private Float ammount;
 
     public Long getId() {
         return id;
@@ -50,6 +53,22 @@ public class Expense {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Date getCreation() {
+        return creation;
+    }
+
+    public void setCreation(Date creation) {
+        this.creation = creation;
+    }
+
+    public Float getAmmount() {
+        return ammount;
+    }
+
+    public void setAmmount(Float ammount) {
+        this.ammount = ammount;
     }
 
     @Override

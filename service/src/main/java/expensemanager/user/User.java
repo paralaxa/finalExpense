@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private String username;
     @NotNull
     private String password;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "USER_TO_ROLE")
     private List<Role> roles;
 

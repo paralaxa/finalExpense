@@ -6,6 +6,7 @@ import expensemanager.user.UserDto;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 public class ExpenseDto implements Serializable {
     @NotNull
@@ -13,6 +14,24 @@ public class ExpenseDto implements Serializable {
     private UserDto creator;
     private String description;
     private CategoryDto category;
+    private Date creation;
+    private Float ammount;
+
+    public Date getCreation() {
+        return creation;
+    }
+
+    public void setCreation(Date creation) {
+        this.creation = creation;
+    }
+
+    public Float getAmmount() {
+        return ammount;
+    }
+
+    public void setAmmount(Float ammount) {
+        this.ammount = ammount;
+    }
 
     public Long getId() {
         return id;

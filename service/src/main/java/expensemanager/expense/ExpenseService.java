@@ -12,6 +12,8 @@ public interface ExpenseService {
 
     ExpenseDto findById(Long id);
 
+
+
     List<ExpenseDto> findByCategoryId(Long categoryId);
 
     List<ExpenseDto> findAll();

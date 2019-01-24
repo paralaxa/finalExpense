@@ -3,12 +3,12 @@ package expensemanager.expense;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/v1")
 public class ExpenseResourceImpl implements ExpenseResource {
     private ExpenseService expenseService;
+
 
     public ExpenseResourceImpl(ExpenseService expenseService) {
         this.expenseService = expenseService;
@@ -34,7 +34,7 @@ public class ExpenseResourceImpl implements ExpenseResource {
 
     @Override
     @PutMapping("expense/{id}")
-    public ExpenseDto update(@RequestBody ExpenseUpdateDto expenseUpdateDto,@PathVariable("id") Long id) {
+    public ExpenseDto update(@RequestBody ExpenseUpdateDto expenseUpdateDto, @PathVariable("id") Long id) {
         expenseUpdateDto.setId(id);
         return expenseService.update(expenseUpdateDto);
     }

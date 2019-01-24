@@ -1,7 +1,13 @@
 package expensemanager.category;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.util.Set;
 
 @RestController
@@ -37,8 +43,14 @@ public class CategoryResourceImpl implements CategoryResource {
     @Override
     @GetMapping("category/{id}")
     public CategoryDto getById(@PathVariable("id") Long id) {
+
+        System.out.println("getting cat by id");
         return categoryService.findById(id);
     }
 
-
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<Object> hanldeConstraintViolation(
+            ConstraintViolationException ex) {
+        return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+    }
 }

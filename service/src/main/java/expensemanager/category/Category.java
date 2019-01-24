@@ -2,6 +2,7 @@ package expensemanager.category;
 
 import expensemanager.expense.Expense;
 import expensemanager.user.User;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -16,9 +17,9 @@ public class Category {
     private String name;
     @Column(name = "description")
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User creator;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private Set<Expense> expenses;
 
     public void setId(Long id) {

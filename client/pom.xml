@@ -11,5 +11,11 @@
 
     <artifactId>client</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>sk.stopangin.spring.l5rest</groupId>
+            <artifactId>api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

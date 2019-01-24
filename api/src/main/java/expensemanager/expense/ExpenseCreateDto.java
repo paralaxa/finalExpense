@@ -1,16 +1,37 @@
 package expensemanager.expense;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 public class ExpenseCreateDto implements Serializable {
     @JsonIgnore
     private Long creatorId;
-    @NotNull
     private String description;
     private Long categoryId;
+    @JsonFormat(pattern="dd.MM.yyyy")
+    private Date creation;
+    private Float ammount;
+
+    @JsonFormat(pattern="dd.MM.yyyy")
+    public Date getCreation() {
+        return creation;
+    }
+    @JsonFormat(pattern="dd.MM.yyyy")
+    public void setCreation(Date creation) {
+        this.creation = creation;
+    }
+
+    public Float getAmmount() {
+        return ammount;
+    }
+
+    public void setAmmount(Float ammount) {
+        this.ammount = ammount;
+    }
 
     public Long getCreatorId() {
         return creatorId;
